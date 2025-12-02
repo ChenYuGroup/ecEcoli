@@ -1,6 +1,6 @@
 # *Escherichia coli* Enzyme-Constrained Model Construction
 
-This project constructs a high-quality enzyme-constrained model of *Escherichia coli* (*E. coli*) based on **[GECKO 3.0](https://github.com/SysBioChalmers/GECKO)**.
+This project constructs a high-quality enzyme-constrained model of *Escherichia coli* based on **[GECKO 3.0](https://github.com/SysBioChalmers/GECKO)**.
 
 ---
 
