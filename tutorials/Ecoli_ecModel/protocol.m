@@ -25,7 +25,7 @@ GECKOInstaller.install
 % - Initiate a basic structure of files and folders for your intended
 %   project. This includes a copy of the template adapter.
 %   The next line is commented out as the project structure is already
-%   available in GECKO/tutorials/Ecoli_ecGEM.
+%   available in GECKO/tutorials/Ecoli_ecModel.
 % startGECKOproject()
 
 % STEP 2: Store the starting GEM
@@ -36,7 +36,7 @@ GECKOInstaller.install
 
 % STEP 3: Modify the model adapter
 % Model-specific parameters in the model adapter, which for this tutorial is
-% located at tutorials/Ecoli_ecGEM/ecEcoliGEMadapter.m.
+% located at tutorials/Ecoli_ecModel/ecEcoliGEMadapter.m.
 
 
 %% STAGE 2: Expansion from a starting metabolic model to an ecModel structure
@@ -58,7 +58,7 @@ params = ModelAdapter.getParameters();
 % simply use loadConventionalGEM().
 model = loadConventionalGEM();
 % Alternatively, the model can be imported directly from an SBML file:
-% model = importModel(fullfile(findGECKOroot,'tutorials','Ecoli_ecGEM','models','iML1515.xml'));
+% model = importModel(fullfile(findGECKOroot,'tutorials','Ecoli_ecModel','models','iML1515.xml'));
 
 % STEP 6: Prepare ecModel
 % Convert the conventional GEM into an enzyme-constrained model (ecModel)
@@ -187,15 +187,15 @@ sol = solveLP(ecModel,1);
 bioRxnIdx = getIndexes(ecModel,params.bioRxn,'rxns');
 fprintf('Growth rate: %f /hour.\n', sol.x(bioRxnIdx)) % Growth rate: 0.898699 /hour.
 
-% STEP 24: Simulate Crabtree effect considering protein pool constraints
-% We will below run a custom plotCrabtree function that is kept in the code
+% STEP 24: Simulate overflow metabolism considering protein pool constraints
+% We will below run a custom plotExoMets function that is located in the code
 % subfolder. To run this function we will need to navigate into the folder
 % where it is stored, but we will navigate back to the current folder
 % afterwards.
 currentFolder = pwd;
 cd(fullfile(params.path,'code'))
-% Plot Crabtree effect to analyze metabolic flux distribution
-plotCrabtree(ecModel);
+% Plot overflow metabolism to analyze metabolic flux distribution
+plotExoMets(ecModel);
 
 % STEP 25-26: Address pyruvate overflow
 % Issue: The model exhibits pyruvate overflow
@@ -205,8 +205,8 @@ plotCrabtree(ecModel);
 ecModel = setKcatForReactions(ecModel,'ACt2rpp_REV',551.74);
 ecModel = applyKcatConstraints(ecModel);
 
-% Plot Crabtree effect to analyze metabolic flux distribution
-plotCrabtree(ecModel);
+% Plot overflow metabolism to analyze metabolic flux distribution
+plotExoMets(ecModel);
 
 % STEP 27-28: Address insufficient acetate production
 % Issue: Acetate production is lower than expected
@@ -225,14 +225,14 @@ ecModel = setKcatForReactions(ecModel,'ACONTb_EXP_1',2.961);
 ecModel = setKcatForReactions(ecModel,'ACONTb_EXP_2',3.093);
 ecModel = applyKcatConstraints(ecModel);
 
-% Plot Crabtree effect to analyze metabolic flux distribution
+% Plot overflow metabolism to analyze metabolic flux distribution
 % Validation of adjustments: Acetate overflow can now be observed, 
 % and the simulation results are close to experimental measurements
-plotCrabtree(ecModel);
+plotExoMets(ecModel);
 
-% STEP 29: Save the Crabtree effect plot
+% STEP 29: Save the overflow metabolism plot
 % The plot will also be saved in the output subfolder.
-savePDF(gcf, fullfile(params.path,'output','crabtree.pdf'));
+savePDF(gcf, fullfile(params.path,'output','overflow_metabolism.pdf'));
 
 % STEP 30: Save the final ecModel
 % Save the adjusted ecModel in YAML format for subsequent analysis and applications
