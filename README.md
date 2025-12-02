@@ -1,17 +1,16 @@
-# *Escherichia coli* Enzyme-Constrained Metabolic Model Optimization
+# *Escherichia coli* Enzyme-Constrained Model Construction
 
-This project is based on **[GECKO 3.0](https://github.com/SysBioChalmers/GECKO)** and focuses on calibrating and optimizing the *Escherichia coli* (*E. coli*) metabolic model (iML1515)
+This project constructs a high-quality enzyme-constrained model of *Escherichia coli* (*E. coli*) based on **[GECKO 3.0](https://github.com/SysBioChalmers/GECKO)**.
 
 ---
 
 ## 📌 About
 
-- **Objective**: Optimize the *E. coli* metabolic model within the GECKO framework by applying protein constraints and *k*<sub>cat</sub> calibration, ensuring ecModel predictions align with experimental data.  
-- **Base Model**: iML1515 (BiGG)  
+- **Objective**: Construct an enzyme-constrained model of *E. coli* using the GECKO toolbox by applying enzyme constraints and *k*<sub>cat</sub> calibration, ensuring predictions align with experimental data.  
+- **Base Model**: [iML1515](http://bigg.ucsd.edu/models/iML1515)
 - **Highlights**:
-  - Integrates multi-source enzyme data, including **in vivo enzyme activities（*k*<sub>app</sub>）**, **BRENDA**, and **DLKcat**, to significantly improve *k*<sub>cat</sub> coverage.  
-  - Completes **Isozyme** information, enhancing enzyme redundancy handling and flux prediction.  
-  - Enables exploration of overflow metabolism and key metabolic pathway regulation.
+  - Integrates multi-source enzyme data, including in vivo enzyme activities (*k*<sub>max</sub>), BRENDA, and DLKcat, to significantly improve *k*<sub>cat</sub> coverage and quality.  
+  - Enables simulation of overflow metabolism.
 
 ---
 
