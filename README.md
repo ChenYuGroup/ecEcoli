@@ -18,5 +18,5 @@ This project constructs a high-quality enzyme-constrained model of *Escherichia 
 
 ### Requirements
 - MATLAB R2022b or later  
-- RAVEN Toolbox 2.8.3 or later  
+- [RAVEN](https://github.com/SysBioChalmers/RAVEN) Toolbox 2.8.3 or later  
 - Python 3.10+ (optional, for data preprocessing)  
