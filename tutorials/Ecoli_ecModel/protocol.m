@@ -122,16 +122,16 @@ kcatList_merged = mergeDLKcatAndFuzzyKcats(kcatList_DLKcat, kcatList_fuzzy, 1, 1
 ecModel  = selectKcatValue(ecModel, kcatList_merged);
 
 % STEP 17: Apply custom kcat values
-% During the construction of the ecModel, high-confidence intracellular
-% enzyme turnover numbers (kapp) were collected from literature to ensure
+% During the construction of the ecModel, high-confidence in vivo 
+% enzyme activities (kmax) were collected from literature to ensure
 % that the model can accurately reproduce experimental phenotypes.
 % These curated values are stored in the following files:
-%   - customKcats.tsv: experimentally measured intracellular kapp from literature
-%   - customKcats_ML.tsv: machine learning-predicted intracellular kapp based on literature data
-% Apply kapp values calculated from literature
+%   - customKcats.tsv: experimentally measured in vivo kmax from literature
+%   - customKcats_ML.tsv: machine learning-predicted in vivo kmax on literature data
+% Apply kmax values calculated from literature
 ecModel = applyCustomKcats(ecModel,fullfile(params.path,'data','customKcats.tsv'));
 
-% Apply kapp values predicted by machine learning from literature
+% Apply kmax values predicted by machine learning from literature
 [ecModel, rxnUpdated, notMatch] = applyCustomKcats(ecModel,fullfile(params.path,'data','customKcats_ML.tsv'));
 
 % STEP 18: Get kcat values across isozymes
@@ -161,7 +161,7 @@ ecModel = applyKcatConstraints(ecModel);
 % 2. sigma-factor: how saturated enzymes are on average
 % 3. Ptot: total protein content
 % The theoretical maximum protein pool is: Protein pool = f × sigma × Ptot
-% Here, sigma is set to 0.65 because most kcat values are derived from intracellular enzyme activity (kapp),
+% Here, sigma is set to 0.65 because most kcat values are derived from in vivo enzyme activities,
 % which better reflects the actual enzyme saturation in vivo.
 Ptot  = params.Ptot;
 f     = params.f;
@@ -201,7 +201,7 @@ plotExoMets(ecModel);
 % Issue: The model exhibits pyruvate overflow
 % Approach: Increase the kcat of reaction ACt2rpp_REV (acetate transport) by 100-fold
 % Rationale: Enhances flux through the acetate transport reaction, which indirectly
-% promotes pyruvate consumption and mitigates intracellular pyruvate accumulation
+% promotes pyruvate consumption and alleviates intracellular pyruvate accumulation
 ecModel = setKcatForReactions(ecModel,'ACt2rpp_REV',551.74);
 ecModel = applyKcatConstraints(ecModel);
 
