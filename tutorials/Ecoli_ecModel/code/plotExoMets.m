@@ -1,4 +1,4 @@
-function [outV,gRate] = plotCrabtree(ecModel)
+function [outV,gRate] = plotExoMets(ecModel)
 
 %% Define growth rate range
 gRate_full = 0:0.01:1;
